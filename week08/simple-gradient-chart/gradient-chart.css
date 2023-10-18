@@ -1,0 +1,18 @@
+#chart-wrapper {
+  position: relative;
+}
+
+.chart-background {
+  height: 1rem;
+
+  background: rgb(5,172,97);
+  background: linear-gradient(90deg, rgba(5,172,97,1) 0%, rgba(255,106,0,1) 100%);
+}
+
+.chart-marker {
+  border-right: 2px solid black;
+  height: 1.5rem;
+  position: absolute;
+  top: -0.25rem;
+  transition: width 0.25s;
+}
