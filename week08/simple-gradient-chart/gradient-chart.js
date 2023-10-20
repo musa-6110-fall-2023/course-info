@@ -1,31 +1,51 @@
-function initializeGradientChart(chartElId, maximumLevel, benchmarkLevel) {
-  const chartWrapper = document.getElementById(chartElId);
+function initializeGradientChart(chartElId, maximumLevel, initialLevel) {
+  const wrapper = document.getElementById(chartElId);
   const background = document.createElement('div');
-  const benchmarkMarker = document.createElement('div');
-  const description = document.createElement('p');
+  const levelMarker = document.createElement('div');
 
   background.classList.add('chart-background');
-  benchmarkMarker.classList.add('chart-marker');
+  levelMarker.classList.add('chart-marker');
 
-  const scaledBenchmarkLevel = benchmarkLevel / maximumLevel * 100;
-  benchmarkMarker.style.width = `${scaledBenchmarkLevel}%`;
+  wrapper.append(background);
+  wrapper.append(levelMarker);
 
-  chartWrapper.append(background);
-  chartWrapper.append(benchmarkMarker);
-  chartWrapper.append(description);
-
-  return {
-    chartWrapper,
+  const chart = {
+    wrapper,
     background,
-    benchmarkMarker,
+    levelMarker,
     maximumLevel,
   };
+
+  updateChartLevel(chart, initialLevel);
+
+  return chart;
 }
 
 function updateChartLevel(chart, newLevel) {
+  // Note that the following uses a linear scale to convert from the input
+  // range (i.e. 0 to maximumLevel) to the output domain (i.e. 0 to 100).
   const scaledLevel = newLevel / chart.maximumLevel * 100;
-  chart.benchmarkMarker.style.width = `${scaledLevel}%`;
+  // For values that are uniformly or normally distributed, this kind of linear
+  // scale makes sense. However, in some cases it would be appropriate to use a
+  // logarithmic range (e.g. if the values are concentrated on the low end, and
+  // it's less important to differentiate high values from each other). That
+  // could be done like this:
+  //
+  // const scaledLevel = Math.log(newLevel) / Math.log(chart.maximumLevel) * 100;
+
+  chart.levelMarker.style.width = `${scaledLevel}%`;
 }
+
+export {
+  initializeGradientChart,
+  updateChartLevel,
+};
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  You could then import this module from your main.js file. Something like:
+
+  import { initialiseGradientChart, updateChartLevel } from './gradient-chart.js';
+*/
 
 const chart = initializeGradientChart('chart-wrapper', 800, 200);
 
