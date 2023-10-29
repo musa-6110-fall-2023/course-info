@@ -51,3 +51,20 @@ main {
 #majority-threshold {
   width: 100%;
 }
+
+@media screen and (max-width: 425px) {
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  .legend {
+    margin-left: 10px; /* Same as Leaflet puts on the right */
+    width: auto;
+  }
+}
+
+@media screen and (max-height: 425px) {
+  h1 {
+    font-size: 1.2rem;
+  }
+}
