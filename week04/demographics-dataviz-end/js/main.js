@@ -265,7 +265,7 @@ function initLegend() {
     const thresholdInput = div.querySelector('#majority-threshold');
     const thresholdDisplay = div.querySelector('#majority-threshold-display');
     thresholdInput.addEventListener('mousedown', (evt) => evt.stopPropagation());
-    thresholdInput.addEventListener('change', () => {
+    thresholdInput.addEventListener('input', () => {
       THRESHOLD = thresholdInput.value / 100.0;
       thresholdDisplay.innerHTML = `${thresholdInput.value}%`;
       dataLayer.resetStyle();
