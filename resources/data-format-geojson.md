@@ -66,4 +66,4 @@ The following is a simple example of a GeoJSON object:
 * More than you ever wanted to know about GeoJSON: https://macwright.com/2015/03/23/geojson-second-bite.html
 
 ## Recommended reading
-* Introduction to Web Mapping chapter on GeoJSON: http://132.72.155.230:3838/js/geojson-1.html
+* Introduction to Web Mapping chapter on GeoJSON: https://geobgu.xyz/web-mapping2/geojson-1.html
