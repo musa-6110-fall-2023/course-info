@@ -3,6 +3,12 @@ body {
   margin: 0;
 }
 
-.map {
+main {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.map {
+  height: 100%;
 }
