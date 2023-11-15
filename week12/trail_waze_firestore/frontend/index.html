@@ -1,0 +1,63 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Philly Trail Waze</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- The map -->
+  <div class="map" id="map">Map</div>
+
+  <!-- The issue reporter -->
+  <div class="report-issue-btn">
+    <button>Report an Issue</button>
+  </div>
+
+  <div class="issue-report-form hidden">
+    <div class="issue-report-closer">
+      <button class="close-issue-form">Cancel</button>
+    </div>
+
+    <div class="issue-report-step step-select-trail">
+      <p>On the map, click the trail where you found the issue.</p>
+      <button class="continue-btn">Continue...</button>
+    </div>
+
+    <div class="issue-report-step step-select-point">
+      <p>Click a point on the map nearest to the issue.</p>
+      <button class="continue-btn">Continue...</button>
+    </div>
+
+    <div class="issue-report-step step-give-details">
+      <label for="issue-category">Type of issue...</label>
+      <select class="full-width-issue-field" id="issue-category">
+        <option value="debris">Debris</option>
+        <option value="poop">Poop</option>
+        <option value="trash">Trash</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label for="issue-datetime">When you encountered the issue...</label>
+      <input class="full-width-issue-field" id="issue-datetime" type="datetime-local">
+
+      <textarea class="full-width-issue-field" id="issue-details" placeholder="Give any details about the issue..."></textarea>
+
+      <button>Submit Issue Report</button>
+    </div>
+  </div>
+
+  <!--======== SCRIPTS ========-->
+  <!-- Leaflet JS library -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+  <!-- Turf (for geoprocessing) -->
+  <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

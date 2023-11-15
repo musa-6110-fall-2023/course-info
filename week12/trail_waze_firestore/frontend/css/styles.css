@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  background-color: #B6E59E;
+  border: 1px solid gray;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  font-size: 1.2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hidden {
+  display: none;
+}
+
+.map {
+  flex-grow: 1;
+}
+
+.report-issue-btn {
+  margin-top: -4rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 1.5rem;
+  z-index: 400;
+}
+
+.issue-report-form {
+  position: relative;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 1rem;
+}
+
+.issue-report-closer {
+  position: absolute;
+  top: -2rem;
+  z-index: 400;
+}
+
+.issue-report-closer button {
+  background-color: #E6AC7F;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.step-give-details {
+  padding-top: 1rem;
+}
+
+.step-give-details label {
+  display: block;
+}
+
+.step-give-details .full-width-issue-field {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-weight: 1;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
