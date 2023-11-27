@@ -8,8 +8,9 @@ To use some of Mapbox's pre-made styles, you'll have to have a Mapbox access tok
 const mapboxAccount = 'mapbox';
 const mapboxStyle = 'light-v10';
 const mapboxToken = '...'
-L.tileLayer(`https://api.mapbox.com/styles/v1/${mapboxAccount}/${mapboxStyle}/tiles/256/{z}/{x}/{y}@2x?access_token=${mapboxToken}`, {
+L.tileLayer(`https://api.mapbox.com/styles/v1/${mapboxAccount}/${mapboxStyle}/tiles/512/{z}/{x}/{y}@2x?access_token=${mapboxToken}`, {
     maxZoom: 19,
+    zoomOffset: -1,
     attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
 }).addTo(schoolMap);
 ```
