@@ -1,0 +1,36 @@
+<!doctype html>
+
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+    <style>
+      #map {
+        height: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+    <script type="module">
+      const map = L.map('map', {preferCanvas: true}).setView([39.95, -75.16], 16);
+
+      const mapboxAccount = 'mapbox';
+      const mapboxStyle = 'streets-v12';
+      const mapboxToken = 'pk.eyJ1IjoibWp1bWJlLXRlc3QiLCJhIjoiY2w3ZTh1NTIxMTgxNTQwcGhmODU2NW5kaSJ9.pBPd19nWO-Gt-vTf1pOHBA';
+      L.tileLayer(`https://api.mapbox.com/styles/v1/${mapboxAccount}/${mapboxStyle}/tiles/{tileSize}/{z}/{x}/{y}{r}?access_token=${mapboxToken}`, {
+          tileSize: 512,
+          zoomOffset: -1,
+          maxZoom: 19,
+          attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
+      }).addTo(map);
+
+      // Tree inventory from https://opendataphilly.org/datasets/philadelphia-tree-inventory/
+      const resp = await fetch('../data/PPR_Tree_Inventory_2022.geojson');
+      const data = await resp.json();
+      L.geoJSON(data, {
+        pointToLayer: (p, ll) => L.circleMarker(ll),
+      }).addTo(map)
+    </script>
+  </body>
+</html>
