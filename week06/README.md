@@ -1,3 +1,14 @@
+## Agenda
+
+0.  Recap -- We started building a [school explorer dashboard](https://musa-6110-fall-2023.github.io/dashboard-project/examples/school-explorer-for-parents/).
+    - Determined our target was parents deciding where to send their kids to school
+    - Listed out the information that we could surface for parents to help with their decision
+    - Drew up some basic mock ups for the layout of our information
+    - Set up our basic page
+1.  More School Explorer
+    - 
+
+
 ## Starting the next project -- Build a Dashboard
 
 Fork https://github.com/musa-6110-fall-2023/dashboard-project

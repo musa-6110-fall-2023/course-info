@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
       crossorigin=""/>
+    <link href="https://unpkg.com/maplibre-gl@2.2.1/dist/maplibre-gl.css" rel='stylesheet' />
 
     <style>
       html, body { margin: 0; padding: 0; }
@@ -19,29 +20,55 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""></script>
+    <script src="https://unpkg.com/maplibre-gl@2.2.1/dist/maplibre-gl.js"></script>
+    <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.17/leaflet-maplibre-gl.js"></script>
 
     <script>
       // STEP 1
       // ------
       // Create a Leaflet map object, and attach it to the element with id of
       // "sample-map".
-      const map = L.map('sample-map').setView([39.99, -75.16], 11);
+      const map = L.map('sample-map', {preferCanvas: true}).setView([39.99, -75.16], 11);
 
       // STEP 2
       // ------
       // Create a Leaflet tile layer object that we will use as a base layer
       // for the map. The tile layer will use Mapbox's basic satellite raster
       // tiles.
+      // const baseLayer = L.maplibreGL({
+      //   style: 'https://api.mapbox.com/styles/v1/mapbox/dark-v11?access_token=pk.eyJ1IjoibWp1bWJlLXRlc3QiLCJhIjoiY2w3ZTh1NTIxMTgxNTQwcGhmODU2NW5kaSJ9.pBPd19nWO-Gt-vTf1pOHBA'
+      // });
       const baseLayer = L.tileLayer(
-        'https://api.mapbox.com/v4/mapbox.satellite/{z}/{x}/{y}@2x.jpg90?access_token={apiKey}',
-        { apiKey: 'pk.eyJ1IjoibWp1bWJlLXRlc3QiLCJhIjoiY2w3ZTh1NTIxMTgxNTQwcGhmODU2NW5kaSJ9.pBPd19nWO-Gt-vTf1pOHBA' });
+        // 'https://api.mapbox.com/v4/mapbox.satellite/{z}/{x}/{y}@2x.jpg90?access_token={apiKey}',
+        // 'https://api.mapbox.com/v4/mapbox.dark-v11/{z}/{x}/{y}{r}.png?access_token={apiKey}',
+        // 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+        // 'https://api.mapbox.com/styles/v1/mapbox/dark-v11/wmts?access_token={apiKey}',
+        'https://api.mapbox.com/styles/v1/mapbox/light-v11/tiles/{z}/{x}/{y}{r}?access_token={apiKey}',
+        { apiKey: 'pk.eyJ1IjoibWp1bWJlLXRlc3QiLCJhIjoiY2w3ZTh1NTIxMTgxNTQwcGhmODU2NW5kaSJ9.pBPd19nWO-Gt-vTf1pOHBA', tileSize: 512, zoomOffset: -1 });
       baseLayer.addTo(map);
 
       // STEP 3
       // ------
       // Create a Leaflet GeoJSON layer that will display the data that we load
       // from Azavea's neighborhoods dataset.
-      const dataLayer = L.geoJSON(null, {style: {color: 'red'}});
+      function calculateFeatureStyle(feature) {
+        const allColors = ['#e66101','#fdb863','#f7f7f7','#b2abd2','#5e3c99'];
+        const name = feature.properties.name;
+        const color = (name[0] <= 'E') ? allColors[0] :
+                      (name[0] <= 'J') ? allColors[1] :
+                      (name[0] <= 'O') ? allColors[2] :
+                      (name[0] <= 'T') ? allColors[3] :
+                                         allColors[4];
+
+        return { color: 'black', weight: 1, fillColor: color, fillOpacity: 0.7 };
+      }
+
+      function calculateTooltip(layer) {
+        return layer.feature.properties.mapname;
+      }
+
+      const dataLayer = L.geoJSON(null, {style: calculateFeatureStyle});
+      dataLayer.bindTooltip(calculateTooltip)
       dataLayer.addTo(map);
 
       // STEP 4
